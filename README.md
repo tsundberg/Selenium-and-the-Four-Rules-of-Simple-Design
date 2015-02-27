@@ -8,7 +8,3 @@ The rules are:
 * Express intent
 * No duplication
 * Small
-<<<<<<< HEAD
-=======
-
->>>>>>> 2eb9a4c... Initial commit
