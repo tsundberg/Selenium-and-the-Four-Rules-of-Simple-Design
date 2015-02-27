@@ -27,6 +27,7 @@ public class ThinkGeekHelper {
 
             driver.findElement(By.id("submitcart")).click();
 
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
             driver.findElement(By.id("topnav_cart")).click();
             driver.findElement(By.id("cart-table"));
             List<WebElement> cartRows = driver.findElements(By.className("cart-table-row"));
