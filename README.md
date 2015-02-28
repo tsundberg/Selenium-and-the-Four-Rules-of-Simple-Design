@@ -8,3 +8,6 @@ The rules are:
 * Express intent
 * No duplication
 * Small
+
+The source code written at [Selenium Camp 2015](http://seleniumcamp.com/) is available in the 
+[branch SeleniumCamp-2015](https://github.com/tsundberg/Selenium-and-the-Four-Rules-of-Simple-Design/commits/SeleniumCamp-2015)
