@@ -3,7 +3,6 @@ package se.thinkcode;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,8 +14,13 @@ import static org.junit.Assert.assertThat;
 
 public class ThinkGeekHelper {
 
+    private WebDriver driver;
+
+    public ThinkGeekHelper(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public void addFluxCapacitorToCart() throws InterruptedException {
-        WebDriver driver = new FirefoxDriver();
         try {
             driver.get("http://www.thinkgeek.com");
             driver.get("http://www.thinkgeek.com/interests/back-to-the-future");
@@ -47,7 +51,6 @@ public class ThinkGeekHelper {
     }
 
     public void addSonicScrewdriverToCart() throws InterruptedException {
-        WebDriver driver = new FirefoxDriver();
         try {
             driver.get("http://www.thinkgeek.com");
             driver.get("http://www.thinkgeek.com/interests/doctorwho");
@@ -76,9 +79,6 @@ public class ThinkGeekHelper {
             driver.quit();
         }
     }
-
-
-
 
 
 }

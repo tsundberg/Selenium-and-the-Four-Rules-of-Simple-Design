@@ -2,6 +2,8 @@ package se.thinkcode;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BuyGeekyStuffTest {
 
@@ -9,7 +11,8 @@ public class BuyGeekyStuffTest {
 
     @Before
     public void setUp(){
-        thinkGeekHelper = new ThinkGeekHelper();
+        WebDriver driver = new FirefoxDriver();
+        thinkGeekHelper = new ThinkGeekHelper(driver);
     }
 
     @Test
