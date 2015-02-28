@@ -14,71 +14,59 @@ import static org.junit.Assert.assertThat;
 
 public class ThinkGeekHelper {
 
-    private WebDriver driver;
+    private WebDriver browser;
 
-    public ThinkGeekHelper(WebDriver driver) {
-        this.driver = driver;
+    public ThinkGeekHelper(WebDriver browser) {
+        this.browser = browser;
     }
 
     public void addFluxCapacitorToCart() throws InterruptedException {
-        try {
-            driver.get("http://www.thinkgeek.com");
-            driver.get("http://www.thinkgeek.com/interests/back-to-the-future");
+        browser.get("http://www.thinkgeek.com");
+        browser.get("http://www.thinkgeek.com/interests/back-to-the-future");
 
-            WebDriverWait wait = new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-1e2e")));
-            driver.findElement(By.id("item-1e2e")).findElement(By.tagName("a")).click();
+        WebDriverWait wait = new WebDriverWait(browser, 20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-1e2e")));
+        browser.findElement(By.id("item-1e2e")).findElement(By.tagName("a")).click();
 
-            driver.findElement(By.id("submitcart")).click();
+        browser.findElement(By.id("submitcart")).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-            driver.findElement(By.id("topnav_cart")).click();
-            driver.findElement(By.id("cart-table"));
-            List<WebElement> cartRows = driver.findElements(By.className("cart-table-row"));
-            assertThat(cartRows.size(), is(1));
-            WebElement productRow = cartRows.get(0);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
+        browser.findElement(By.id("topnav_cart")).click();
+        browser.findElement(By.id("cart-table"));
+        List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
+        assertThat(cartRows.size(), is(1));
+        WebElement productRow = cartRows.get(0);
 
-            WebElement productLink = productRow.findElement(By.partialLinkText("Flux Capacitor"));
-            assertNotNull(productLink);
+        WebElement productLink = productRow.findElement(By.partialLinkText("Flux Capacitor"));
+        assertNotNull(productLink);
 
-            WebElement quantityElement = productRow.findElement(By.name("0_qty"));
-            String quantity = quantityElement.getAttribute("value");
-            assertThat(quantity, is("1"));
-
-        } finally {
-            driver.quit();
-        }
+        WebElement quantityElement = productRow.findElement(By.name("0_qty"));
+        String quantity = quantityElement.getAttribute("value");
+        assertThat(quantity, is("1"));
     }
 
     public void addSonicScrewdriverToCart() throws InterruptedException {
-        try {
-            driver.get("http://www.thinkgeek.com");
-            driver.get("http://www.thinkgeek.com/interests/doctorwho");
+        browser.get("http://www.thinkgeek.com");
+        browser.get("http://www.thinkgeek.com/interests/doctorwho");
 
-            WebDriverWait wait = new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-ee4a")));
-            driver.findElement(By.id("item-ee4a")).findElement(By.tagName("a")).click();
+        WebDriverWait wait = new WebDriverWait(browser, 20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-ee4a")));
+        browser.findElement(By.id("item-ee4a")).findElement(By.tagName("a")).click();
 
-            driver.findElement(By.id("submitcart")).click();
+        browser.findElement(By.id("submitcart")).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-            driver.findElement(By.id("topnav_cart")).click();
-            driver.findElement(By.id("cart-table"));
-            List<WebElement> cartRows = driver.findElements(By.className("cart-table-row"));
-            assertThat(cartRows.size(), is(1));
-            WebElement productRow = cartRows.get(0);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
+        browser.findElement(By.id("topnav_cart")).click();
+        browser.findElement(By.id("cart-table"));
+        List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
+        assertThat(cartRows.size(), is(1));
+        WebElement productRow = cartRows.get(0);
 
-            WebElement productLink = productRow.findElement(By.partialLinkText("Sonic Screwdriver"));
-            assertNotNull(productLink);
+        WebElement productLink = productRow.findElement(By.partialLinkText("Sonic Screwdriver"));
+        assertNotNull(productLink);
 
-            WebElement quantityElement = productRow.findElement(By.name("0_qty"));
-            String quantity = quantityElement.getAttribute("value");
-            assertThat(quantity, is("1"));
-
-        } finally {
-            driver.quit();
-        }
+        WebElement quantityElement = productRow.findElement(By.name("0_qty"));
+        String quantity = quantityElement.getAttribute("value");
+        assertThat(quantity, is("1"));
     }
-
-
 }
