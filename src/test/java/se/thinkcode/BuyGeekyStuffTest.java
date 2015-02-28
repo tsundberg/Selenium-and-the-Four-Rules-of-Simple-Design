@@ -8,4 +8,9 @@ public class BuyGeekyStuffTest extends ThinkGeekHelper {
     public void shouldBuyFluxCapacitor() throws Exception {
         buyBackToTheFutureFluxCapacitor();
     }
+
+    @Test
+    public void shouldBuyDrWhoSonicScrewdriver() throws Exception {
+        buyDrWhoSonicScrewdriver();
+    }
 }
