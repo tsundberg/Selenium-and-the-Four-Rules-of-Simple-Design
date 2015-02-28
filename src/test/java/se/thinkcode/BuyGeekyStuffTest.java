@@ -13,12 +13,12 @@ public class BuyGeekyStuffTest {
     }
 
     @Test
-    public void shouldBuyFluxCapacitor() throws Exception {
-        thinkGeekHelper.buyBackToTheFutureFluxCapacitor();
+    public void shouldAddFluxCapacitorToCart() throws Exception {
+        thinkGeekHelper.addFluxCapacitorToCart();
     }
 
     @Test
-    public void shouldBuyDrWhoSonicScrewdriver() throws Exception {
-        thinkGeekHelper.buyDrWhoSonicScrewdriver();
+    public void shouldAddDrWhoSonicScrewdriverToCart() throws Exception {
+        thinkGeekHelper.addSonicScrewdriverToCart();
     }
 }

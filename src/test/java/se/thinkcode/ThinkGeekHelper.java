@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 
 public class ThinkGeekHelper {
 
-    public void buyBackToTheFutureFluxCapacitor() throws InterruptedException {
+    public void addFluxCapacitorToCart() throws InterruptedException {
         WebDriver driver = new FirefoxDriver();
         try {
             driver.get("http://www.thinkgeek.com");
@@ -46,7 +46,7 @@ public class ThinkGeekHelper {
         }
     }
 
-    public void buyDrWhoSonicScrewdriver() throws InterruptedException {
+    public void addSonicScrewdriverToCart() throws InterruptedException {
         WebDriver driver = new FirefoxDriver();
         try {
             driver.get("http://www.thinkgeek.com");
