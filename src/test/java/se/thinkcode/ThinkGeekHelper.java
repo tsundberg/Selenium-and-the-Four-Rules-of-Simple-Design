@@ -1,54 +1,36 @@
 package se.thinkcode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class ThinkGeekHelper {
 
-    private WebDriver browser;
+    private CartPage cartPage = new CartPage();
 
-    private CartPage cartPage;
+    public void addFluxCapacitorToCart() {
+        open("http://www.thinkgeek.com");
+        open("http://www.thinkgeek.com/interests/back-to-the-future");
 
-    public ThinkGeekHelper(WebDriver browser) {
-        this.browser = browser;
-        cartPage = new CartPage(browser);
+        $("#item-1e2e").shouldBe(visible);
+        $("#item-1e2e a").click();
+
+        $("#submitcart").click();
+        $("#topnav_cart").click();
+
+        cartPage.assertCart("Flux Capacitor");
     }
 
-    public void addFluxCapacitorToCart() throws InterruptedException {
-        browser.get("http://www.thinkgeek.com");
-        browser.get("http://www.thinkgeek.com/interests/back-to-the-future");
+    public void addSonicScrewdriverToCart() {
+        open("http://www.thinkgeek.com");
+        open("http://www.thinkgeek.com/interests/doctorwho");
 
-        WebDriverWait wait = new WebDriverWait(browser, 20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-1e2e")));
-        browser.findElement(By.id("item-1e2e")).findElement(By.tagName("a")).click();
+        $("#item-ee4a").shouldBe(visible);
+        $("#item-ee4a a").click();
 
-        browser.findElement(By.id("submitcart")).click();
+        $("#submitcart").click();
+        $("#topnav_cart").click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-        browser.findElement(By.id("topnav_cart")).click();
-
-
-        String partialProductName = "Flux Capacitor";
-        cartPage.assertCart(partialProductName);
-    }
-
-    public void addSonicScrewdriverToCart() throws InterruptedException {
-        browser.get("http://www.thinkgeek.com");
-        browser.get("http://www.thinkgeek.com/interests/doctorwho");
-
-        WebDriverWait wait = new WebDriverWait(browser, 20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-ee4a")));
-        browser.findElement(By.id("item-ee4a")).findElement(By.tagName("a")).click();
-
-        browser.findElement(By.id("submitcart")).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-        browser.findElement(By.id("topnav_cart")).click();
-
-
-        String partialProductName = "Sonic Screwdriver";
-        cartPage.assertCart(partialProductName);
+        cartPage.assertCart("Sonic Screwdriver");
     }
 }
