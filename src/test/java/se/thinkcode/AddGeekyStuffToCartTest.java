@@ -1,34 +1,26 @@
 package se.thinkcode;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
+import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
 
 public class AddGeekyStuffToCartTest {
 
-    private WebDriver browser;
-    private ThinkGeekHelper thinkGeekHelper;
+    private ThinkGeekHelper thinkGeekHelper = new ThinkGeekHelper();
 
     @Before
     public void setUp() {
-        browser = new FirefoxDriver();
-        thinkGeekHelper = new ThinkGeekHelper(browser);
-    }
-
-    @After
-    public void tearDown() {
-        browser.quit();
+        clearBrowserCache();
     }
 
     @Test
-    public void shouldAddFluxCapacitorToCart() throws Exception {
+    public void shouldAddFluxCapacitorToCart() {
         thinkGeekHelper.addFluxCapacitorToCart();
     }
 
     @Test
-    public void shouldAddDrWhoSonicScrewdriverToCart() throws Exception {
+    public void shouldAddDrWhoSonicScrewdriverToCart() {
         thinkGeekHelper.addSonicScrewdriverToCart();
     }
 }
