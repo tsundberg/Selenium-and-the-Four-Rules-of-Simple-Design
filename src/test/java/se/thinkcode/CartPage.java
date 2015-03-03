@@ -1,36 +1,23 @@
 package se.thinkcode;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static com.codeborne.selenide.CollectionCondition.size;
+import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class CartPage {
 
-    WebDriver browser;
-
-    public CartPage(WebDriver browser) {
-        this.browser = browser;
-    }
-
     public void assertCart(String partialProductName) {
-        browser.findElement(By.id("cart-table"));
-        List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
-        assertThat(cartRows.size(), is(1));
-        WebElement productRow = cartRows.get(0);
+        $("#cart-table");
+        $$(".cart-table-row").shouldHave(size(1));
+        
+        SelenideElement productRow = $(".cart-table-row");
 
-        WebElement productLink = productRow.findElement(By.partialLinkText(partialProductName));
-        assertNotNull(productLink);
-
-        WebElement quantityElement = productRow.findElement(By.name("0_qty"));
-        String quantity = quantityElement.getAttribute("value");
-        assertThat(quantity, is("1"));
+        productRow.find(By.partialLinkText(partialProductName)).shouldBe(visible);
+        productRow.find(By.name("0_qty")).shouldHave(value("1"));
     }
-
-
 }
