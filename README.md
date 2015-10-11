@@ -16,4 +16,4 @@ An extension from the result at [Selenium Camp](http://seleniumcamp.com/) using 
 thanks to [Andrei Solntsev](https://github.com/asolntsev).
 
 The source code written at [Java Developer Day 2015](http://15.jdd.org.pl/) is available in the
-[Java-Developer-Day-2015](https://github.com/tsundberg/Selenium-and-the-Four-Rules-of-Simple-Design/tree/Java-Developer-Day-2015)
+[branch Java-Developer-Day-2015](https://github.com/tsundberg/Selenium-and-the-Four-Rules-of-Simple-Design/tree/Java-Developer-Day-2015)
