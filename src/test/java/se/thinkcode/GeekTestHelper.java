@@ -24,7 +24,9 @@ public class GeekTestHelper {
         browser.get("http://www.thinkgeek.com/interests/back-to-the-future");
 
         String itemId = "item-1e2e";
-        WebDriverWait wait = locateItem(itemId);
+
+        ProductPage productPage = new ProductPage(browser);
+        WebDriverWait wait = productPage.locateItem(itemId);
 
         WebElement productRow = addItemToShoppingCart(wait);
 
@@ -39,7 +41,8 @@ public class GeekTestHelper {
         browser.get("http://www.thinkgeek.com/interests/doctorwho");
 
         String itemId = "item-ee4a";
-        WebDriverWait wait = locateItem(itemId);
+        ProductPage productPage = new ProductPage(browser);
+        WebDriverWait wait = productPage.locateItem(itemId);
 
         WebElement productRow = addItemToShoppingCart(wait);
 
@@ -54,7 +57,8 @@ public class GeekTestHelper {
         browser.get("http://www.thinkgeek.com/interests/gameofthrones");
 
         String itemId = "item-f3c0";
-        WebDriverWait wait = locateItem(itemId);
+        ProductPage productPage = new ProductPage(browser);
+        WebDriverWait wait = productPage.locateItem(itemId);
 
         WebElement productRow = addItemToShoppingCart(wait);
 
@@ -62,13 +66,6 @@ public class GeekTestHelper {
         assertNotNull(productLink);
 
         verifyOneItemInShoppingCart(productRow);
-    }
-
-    private WebDriverWait locateItem(String itemId) {
-        WebDriverWait wait = new WebDriverWait(browser, 20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(itemId)));
-        browser.findElement(By.id(itemId)).findElement(By.tagName("a")).click();
-        return wait;
     }
 
     private WebElement addItemToShoppingCart(WebDriverWait wait) {
