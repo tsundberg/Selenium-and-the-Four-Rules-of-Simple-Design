@@ -51,4 +51,13 @@ public class ProductPage {
     public void goToGameOfThrones() {
         browser.get("http://www.thinkgeek.com/interests/gameofthrones");
     }
+
+    public WebElement addFluxCapacitorToShoppingCart() {
+        String itemId = "item-1e2e";
+
+
+
+        WebDriverWait wait = locateItem(itemId);
+        return addItemToShoppingCart(wait);
+    }
 }

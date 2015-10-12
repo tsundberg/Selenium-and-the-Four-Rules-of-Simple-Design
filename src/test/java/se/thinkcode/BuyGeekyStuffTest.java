@@ -29,10 +29,9 @@ public class BuyGeekyStuffTest {
         ProductPage productPage = new ProductPage(browser);
         productPage.goToBackToTheFuture();
 
-        String itemId = "item-1e2e";
         String itemName = "Flux Capacitor";
-        WebDriverWait wait = productPage.locateItem(itemId);
-        WebElement productRow = productPage.addItemToShoppingCart(wait);
+
+        WebElement productRow = productPage.addFluxCapacitorToShoppingCart();
 
         WebElement productLink = productRow.findElement(By.partialLinkText(itemName));
         assertNotNull(productLink);
@@ -45,8 +44,8 @@ public class BuyGeekyStuffTest {
         ProductPage productPage = new ProductPage(browser);
         productPage.goToDrWho();
 
-        String itemId = "item-ee4a";
         String itemName = "Sonic Screwdriver";
+        String itemId = "item-ee4a";
         WebDriverWait wait = productPage.locateItem(itemId);
         WebElement productRow = productPage.addItemToShoppingCart(wait);
 
