@@ -30,10 +30,11 @@ public class BuyGeekyStuffTest {
         productPage.goToBackToTheFuture();
 
         String itemId = "item-1e2e";
+        String itemName = "Flux Capacitor";
         WebDriverWait wait = productPage.locateItem(itemId);
         WebElement productRow = productPage.addItemToShoppingCart(wait);
 
-        WebElement productLink = productRow.findElement(By.partialLinkText("Flux Capacitor"));
+        WebElement productLink = productRow.findElement(By.partialLinkText(itemName));
         assertNotNull(productLink);
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
         shoppingCartPage.verifyOneItemInShoppingCart(productRow);
@@ -45,10 +46,11 @@ public class BuyGeekyStuffTest {
         productPage.goToDrWho();
 
         String itemId = "item-ee4a";
+        String itemName = "Sonic Screwdriver";
         WebDriverWait wait = productPage.locateItem(itemId);
         WebElement productRow = productPage.addItemToShoppingCart(wait);
 
-        WebElement productLink = productRow.findElement(By.partialLinkText("Sonic Screwdriver"));
+        WebElement productLink = productRow.findElement(By.partialLinkText(itemName));
         assertNotNull(productLink);
 
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
@@ -61,10 +63,11 @@ public class BuyGeekyStuffTest {
         productPage.goToGameOfThrones();
 
         String itemId = "item-f3c0";
+        String itemName = "Game of Thrones Shot Glass Set";
         WebDriverWait wait = productPage.locateItem(itemId);
         WebElement productRow = productPage.addItemToShoppingCart(wait);
 
-        WebElement productLink = productRow.findElement(By.partialLinkText("Game of Thrones Shot Glass Set"));
+        WebElement productLink = productRow.findElement(By.partialLinkText(itemName));
         assertNotNull(productLink);
 
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
