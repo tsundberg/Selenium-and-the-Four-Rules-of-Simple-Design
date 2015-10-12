@@ -3,10 +3,7 @@ package se.thinkcode;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
@@ -27,8 +24,7 @@ public class GeekTestHelper {
 
         ProductPage productPage = new ProductPage(browser);
         WebDriverWait wait = productPage.locateItem(itemId);
-
-        WebElement productRow = addItemToShoppingCart(wait);
+        WebElement productRow = productPage.addItemToShoppingCart(wait);
 
         WebElement productLink = productRow.findElement(By.partialLinkText("Flux Capacitor"));
         assertNotNull(productLink);
@@ -43,8 +39,7 @@ public class GeekTestHelper {
         String itemId = "item-ee4a";
         ProductPage productPage = new ProductPage(browser);
         WebDriverWait wait = productPage.locateItem(itemId);
-
-        WebElement productRow = addItemToShoppingCart(wait);
+        WebElement productRow = productPage.addItemToShoppingCart(wait);
 
         WebElement productLink = productRow.findElement(By.partialLinkText("Sonic Screwdriver"));
         assertNotNull(productLink);
@@ -59,8 +54,7 @@ public class GeekTestHelper {
         String itemId = "item-f3c0";
         ProductPage productPage = new ProductPage(browser);
         WebDriverWait wait = productPage.locateItem(itemId);
-
-        WebElement productRow = addItemToShoppingCart(wait);
+        WebElement productRow = productPage.addItemToShoppingCart(wait);
 
         WebElement productLink = productRow.findElement(By.partialLinkText("Game of Thrones Shot Glass Set"));
         assertNotNull(productLink);
@@ -68,16 +62,6 @@ public class GeekTestHelper {
         verifyOneItemInShoppingCart(productRow);
     }
 
-    private WebElement addItemToShoppingCart(WebDriverWait wait) {
-        browser.findElement(By.id("submitcart")).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-        browser.findElement(By.id("topnav_cart")).click();
-        browser.findElement(By.id("cart-table"));
-        List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
-        assertThat(cartRows.size(), is(1));
-        return cartRows.get(0);
-    }
 
     private void verifyOneItemInShoppingCart(WebElement productRow) {
         WebElement quantityElement = productRow.findElement(By.name("0_qty"));
