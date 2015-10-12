@@ -2,20 +2,22 @@ package se.thinkcode;
 
 import org.junit.Test;
 
-public class BuyGeekyStuffTest extends GeekTestHelper {
+public class BuyGeekyStuffTest {
+
+    private GeekTestHelper geekTestHelper = new GeekTestHelper();
 
     @Test
     public void shouldBuyFluxCapacitor() throws Exception {
-        buyFluxCapacitor();
+        geekTestHelper.buyFluxCapacitor();
     }
 
     @Test
     public void shouldBuyDrWhoSonicScrewdriver() throws Exception {
-        buySonicScrewDriver();
+        geekTestHelper.buySonicScrewDriver();
     }
 
     @Test
     public void shouldBuyGameOfThronesHootGlass() throws Exception {
-        buyGameOfThronsShotGlasses();
+        geekTestHelper.buyGameOfThronsShotGlasses();
     }
 }
