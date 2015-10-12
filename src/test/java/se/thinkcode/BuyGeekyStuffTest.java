@@ -1,10 +1,18 @@
 package se.thinkcode;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BuyGeekyStuffTest {
+    private GeekTestHelper geekTestHelper;
 
-    private GeekTestHelper geekTestHelper = new GeekTestHelper();
+    @Before
+    public void setUp(){
+        WebDriver browser = new FirefoxDriver();
+        geekTestHelper = new GeekTestHelper(browser);
+    }
 
     @Test
     public void shouldPlaceFluxCapacitorInShoppingBag() throws Exception {

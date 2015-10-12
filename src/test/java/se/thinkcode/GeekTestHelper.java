@@ -14,9 +14,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class GeekTestHelper {
-    WebDriver browser = new FirefoxDriver();
+    private WebDriver browser;
 
-    public void buyFluxCapacitor(){
+    public GeekTestHelper(WebDriver browser) {
+        this.browser = browser;
+    }
+
+    public void buyFluxCapacitor() {
         try {
             browser.get("http://www.thinkgeek.com");
             browser.get("http://www.thinkgeek.com/interests/back-to-the-future");
