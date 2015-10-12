@@ -17,7 +17,7 @@ public class BuyGeekyStuffTest {
     }
 
     @Test
-    public void shouldBuyGameOfThronesHootGlass() throws Exception {
+    public void shouldBuyGameOfThronesShootGlass() throws Exception {
         geekTestHelper.buyGameOfThronsShotGlasses();
     }
 }
