@@ -27,14 +27,7 @@ public class GeekTestHelper {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-1e2e")));
         browser.findElement(By.id("item-1e2e")).findElement(By.tagName("a")).click();
 
-        browser.findElement(By.id("submitcart")).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-        browser.findElement(By.id("topnav_cart")).click();
-        browser.findElement(By.id("cart-table"));
-        List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
-        assertThat(cartRows.size(), is(1));
-        WebElement productRow = cartRows.get(0);
+        WebElement productRow = addItemToShoppingCart(wait);
 
         WebElement productLink = productRow.findElement(By.partialLinkText("Flux Capacitor"));
         assertNotNull(productLink);
@@ -50,14 +43,7 @@ public class GeekTestHelper {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-ee4a")));
         browser.findElement(By.id("item-ee4a")).findElement(By.tagName("a")).click();
 
-        browser.findElement(By.id("submitcart")).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-        browser.findElement(By.id("topnav_cart")).click();
-        browser.findElement(By.id("cart-table"));
-        List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
-        assertThat(cartRows.size(), is(1));
-        WebElement productRow = cartRows.get(0);
+        WebElement productRow = addItemToShoppingCart(wait);
 
         WebElement productLink = productRow.findElement(By.partialLinkText("Sonic Screwdriver"));
         assertNotNull(productLink);
@@ -73,6 +59,15 @@ public class GeekTestHelper {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-f3c0")));
         browser.findElement(By.id("item-f3c0")).findElement(By.tagName("a")).click();
 
+        WebElement productRow = addItemToShoppingCart(wait);
+
+        WebElement productLink = productRow.findElement(By.partialLinkText("Game of Thrones Shot Glass Set"));
+        assertNotNull(productLink);
+
+        verifyOneItemInShoppingCart(productRow);
+    }
+
+    private WebElement addItemToShoppingCart(WebDriverWait wait) {
         browser.findElement(By.id("submitcart")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
@@ -80,12 +75,7 @@ public class GeekTestHelper {
         browser.findElement(By.id("cart-table"));
         List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
         assertThat(cartRows.size(), is(1));
-        WebElement productRow = cartRows.get(0);
-
-        WebElement productLink = productRow.findElement(By.partialLinkText("Game of Thrones Shot Glass Set"));
-        assertNotNull(productLink);
-
-        verifyOneItemInShoppingCart(productRow);
+        return cartRows.get(0);
     }
 
     private void verifyOneItemInShoppingCart(WebElement productRow) {
