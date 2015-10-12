@@ -14,22 +14,23 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class GeekTestHelper {
+    WebDriver browser = new FirefoxDriver();
+
     public void buyFluxCapacitor(){
-        WebDriver driver = new FirefoxDriver();
         try {
-            driver.get("http://www.thinkgeek.com");
-            driver.get("http://www.thinkgeek.com/interests/back-to-the-future");
+            browser.get("http://www.thinkgeek.com");
+            browser.get("http://www.thinkgeek.com/interests/back-to-the-future");
 
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(browser, 20);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-1e2e")));
-            driver.findElement(By.id("item-1e2e")).findElement(By.tagName("a")).click();
+            browser.findElement(By.id("item-1e2e")).findElement(By.tagName("a")).click();
 
-            driver.findElement(By.id("submitcart")).click();
+            browser.findElement(By.id("submitcart")).click();
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-            driver.findElement(By.id("topnav_cart")).click();
-            driver.findElement(By.id("cart-table"));
-            List<WebElement> cartRows = driver.findElements(By.className("cart-table-row"));
+            browser.findElement(By.id("topnav_cart")).click();
+            browser.findElement(By.id("cart-table"));
+            List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
             assertThat(cartRows.size(), is(1));
             WebElement productRow = cartRows.get(0);
 
@@ -41,26 +42,25 @@ public class GeekTestHelper {
             assertThat(quantity, is("1"));
 
         } finally {
-            driver.quit();
+            browser.quit();
         }
     }
 
     public void buySonicScrewDriver() {
-        WebDriver driver = new FirefoxDriver();
         try {
-            driver.get("http://www.thinkgeek.com");
-            driver.get("http://www.thinkgeek.com/interests/doctorwho");
+            browser.get("http://www.thinkgeek.com");
+            browser.get("http://www.thinkgeek.com/interests/doctorwho");
 
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(browser, 20);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-ee4a")));
-            driver.findElement(By.id("item-ee4a")).findElement(By.tagName("a")).click();
+            browser.findElement(By.id("item-ee4a")).findElement(By.tagName("a")).click();
 
-            driver.findElement(By.id("submitcart")).click();
+            browser.findElement(By.id("submitcart")).click();
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-            driver.findElement(By.id("topnav_cart")).click();
-            driver.findElement(By.id("cart-table"));
-            List<WebElement> cartRows = driver.findElements(By.className("cart-table-row"));
+            browser.findElement(By.id("topnav_cart")).click();
+            browser.findElement(By.id("cart-table"));
+            List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
             assertThat(cartRows.size(), is(1));
             WebElement productRow = cartRows.get(0);
 
@@ -72,26 +72,25 @@ public class GeekTestHelper {
             assertThat(quantity, is("1"));
 
         } finally {
-            driver.quit();
+            browser.quit();
         }
     }
 
     public void buyGameOfThronsShotGlasses() {
-        WebDriver driver = new FirefoxDriver();
         try {
-            driver.get("http://www.thinkgeek.com");
-            driver.get("http://www.thinkgeek.com/interests/gameofthrones");
+            browser.get("http://www.thinkgeek.com");
+            browser.get("http://www.thinkgeek.com/interests/gameofthrones");
 
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(browser, 20);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("item-f3c0")));
-            driver.findElement(By.id("item-f3c0")).findElement(By.tagName("a")).click();
+            browser.findElement(By.id("item-f3c0")).findElement(By.tagName("a")).click();
 
-            driver.findElement(By.id("submitcart")).click();
+            browser.findElement(By.id("submitcart")).click();
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("topnav_cart")));
-            driver.findElement(By.id("topnav_cart")).click();
-            driver.findElement(By.id("cart-table"));
-            List<WebElement> cartRows = driver.findElements(By.className("cart-table-row"));
+            browser.findElement(By.id("topnav_cart")).click();
+            browser.findElement(By.id("cart-table"));
+            List<WebElement> cartRows = browser.findElements(By.className("cart-table-row"));
             assertThat(cartRows.size(), is(1));
             WebElement productRow = cartRows.get(0);
 
@@ -103,7 +102,7 @@ public class GeekTestHelper {
             assertThat(quantity, is("1"));
 
         } finally {
-            driver.quit();
+            browser.quit();
         }
 
     }
