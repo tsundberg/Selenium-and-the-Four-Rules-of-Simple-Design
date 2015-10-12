@@ -39,9 +39,7 @@ public class GeekTestHelper {
         WebElement productLink = productRow.findElement(By.partialLinkText("Flux Capacitor"));
         assertNotNull(productLink);
 
-        WebElement quantityElement = productRow.findElement(By.name("0_qty"));
-        String quantity = quantityElement.getAttribute("value");
-        assertThat(quantity, is("1"));
+        verifyOneItemInShoppingCart(productRow);
     }
 
     public void buySonicScrewDriver() {
@@ -64,9 +62,7 @@ public class GeekTestHelper {
         WebElement productLink = productRow.findElement(By.partialLinkText("Sonic Screwdriver"));
         assertNotNull(productLink);
 
-        WebElement quantityElement = productRow.findElement(By.name("0_qty"));
-        String quantity = quantityElement.getAttribute("value");
-        assertThat(quantity, is("1"));
+        verifyOneItemInShoppingCart(productRow);
     }
 
     public void buyGameOfThronsShotGlasses() {
@@ -89,6 +85,10 @@ public class GeekTestHelper {
         WebElement productLink = productRow.findElement(By.partialLinkText("Game of Thrones Shot Glass Set"));
         assertNotNull(productLink);
 
+        verifyOneItemInShoppingCart(productRow);
+    }
+
+    private void verifyOneItemInShoppingCart(WebElement productRow) {
         WebElement quantityElement = productRow.findElement(By.name("0_qty"));
         String quantity = quantityElement.getAttribute("value");
         assertThat(quantity, is("1"));
