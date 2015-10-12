@@ -16,7 +16,10 @@ public class ProductPage {
 
     public ProductPage(WebDriver browser) {
         this.browser = browser;
+        browser.get("http://www.thinkgeek.com");
     }
+
+
 
     public WebDriverWait locateItem(String itemId) {
         WebDriverWait wait = new WebDriverWait(browser, 20);
@@ -37,4 +40,15 @@ public class ProductPage {
     }
 
 
+    public void goToBackToTheFuture() {
+        browser.get("http://www.thinkgeek.com/interests/back-to-the-future");
+    }
+
+    public void goToDrWho() {
+        browser.get("http://www.thinkgeek.com/interests/doctorwho");
+    }
+
+    public void goToGameOfThrones() {
+        browser.get("http://www.thinkgeek.com/interests/gameofthrones");
+    }
 }

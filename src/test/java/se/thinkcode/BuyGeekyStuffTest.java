@@ -26,12 +26,10 @@ public class BuyGeekyStuffTest {
 
     @Test
     public void shouldPlaceFluxCapacitorInShoppingBag() throws Exception {
-        browser.get("http://www.thinkgeek.com");
-        browser.get("http://www.thinkgeek.com/interests/back-to-the-future");
+        ProductPage productPage = new ProductPage(browser);
+        productPage.goToBackToTheFuture();
 
         String itemId = "item-1e2e";
-
-        ProductPage productPage = new ProductPage(browser);
         WebDriverWait wait = productPage.locateItem(itemId);
         WebElement productRow = productPage.addItemToShoppingCart(wait);
 
@@ -43,11 +41,10 @@ public class BuyGeekyStuffTest {
 
     @Test
     public void shouldPlaceDrWhoSonicScrewdriverInShoppingBag() throws Exception {
-        browser.get("http://www.thinkgeek.com");
-        browser.get("http://www.thinkgeek.com/interests/doctorwho");
+        ProductPage productPage = new ProductPage(browser);
+        productPage.goToDrWho();
 
         String itemId = "item-ee4a";
-        ProductPage productPage = new ProductPage(browser);
         WebDriverWait wait = productPage.locateItem(itemId);
         WebElement productRow = productPage.addItemToShoppingCart(wait);
 
@@ -60,11 +57,10 @@ public class BuyGeekyStuffTest {
 
     @Test
     public void shouldPlaceGameOfThronesShootGlassInShoppingBag() throws Exception {
-        browser.get("http://www.thinkgeek.com");
-        browser.get("http://www.thinkgeek.com/interests/gameofthrones");
+        ProductPage productPage = new ProductPage(browser);
+        productPage.goToGameOfThrones();
 
         String itemId = "item-f3c0";
-        ProductPage productPage = new ProductPage(browser);
         WebDriverWait wait = productPage.locateItem(itemId);
         WebElement productRow = productPage.addItemToShoppingCart(wait);
 
