@@ -27,7 +27,7 @@ public class BuyMandatoryBooksTest {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
 
-        searchBox.sendKeys("working effectively with legacy code");
+        searchBox.sendKeys("Working Effectively with Legacy Code");
         WebElement searchButton = driver.findElement(By.id("nav-search-submit-text"));
 
         searchButton.click();
