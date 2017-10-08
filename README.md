@@ -17,3 +17,13 @@ thanks to [Andrei Solntsev](https://github.com/asolntsev).
 
 The source code written at [Java Developer Day 2015](http://15.jdd.org.pl/) is available in the
 [branch Java-Developer-Day-2015](https://github.com/tsundberg/Selenium-and-the-Four-Rules-of-Simple-Design/tree/Java-Developer-Day-2015)
+
+## Build
+
+Build with Gradle
+
+    gradlew build
+    
+Gradle wrapper is used, you don't need to install Gradle.
+
+Java must be installed.    
