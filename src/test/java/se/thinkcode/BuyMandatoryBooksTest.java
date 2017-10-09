@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BuyMandatoryBooksTest {
 
     @Test
-    public void shouldBuyWorkingEffectivelyWithLegacyCode() throws Exception {
+    public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
         URL url = getClass().getResource("/geckodriver");
         String geckoDriverPath = url.getFile();
         System.setProperty("webdriver.gecko.driver", geckoDriverPath);
