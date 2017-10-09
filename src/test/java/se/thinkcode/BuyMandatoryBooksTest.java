@@ -1,5 +1,6 @@
 package se.thinkcode;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,15 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuyMandatoryBooksTest {
 
-    @Test
-    public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
+    private WebDriver driver;
+
+    @Before
+    public void setUp() {
         URL url = getClass().getResource("/geckodriver");
         String geckoDriverPath = url.getFile();
         System.setProperty("webdriver.gecko.driver", geckoDriverPath);
-        WebDriver driver = new FirefoxDriver();
+        driver = new FirefoxDriver();
 
         driver.get("http://www.amazon.de");
+    }
 
+    @Test
+    public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
 
