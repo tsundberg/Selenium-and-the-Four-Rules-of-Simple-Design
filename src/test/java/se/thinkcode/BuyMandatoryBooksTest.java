@@ -16,26 +16,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuyMandatoryBooksTest {
 
-    private WebDriver driver;
+    private WebDriver browser;
 
     @Before
     public void setUp() {
         URL url = getClass().getResource("/geckodriver");
         String geckoDriverPath = url.getFile();
         System.setProperty("webdriver.gecko.driver", geckoDriverPath);
-        driver = new FirefoxDriver();
+        browser = new FirefoxDriver();
 
-        driver.get("http://www.amazon.de");
+        browser.get("http://www.amazon.de");
     }
 
     @Test
     public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(browser, 20);
         WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
 
         String searchString = "Working Effectively with Legacy Code";
         searchBox.sendKeys(searchString);
-        WebElement searchButton = driver.findElement(By.id("nav-search-submit-text"));
+        WebElement searchButton = browser.findElement(By.id("nav-search-submit-text"));
 
         searchButton.click();
 
@@ -66,7 +66,7 @@ public class BuyMandatoryBooksTest {
 
         assertThat(htmlClass).containsIgnoringCase("a-alert-success");
 
-        driver.quit();
+        browser.quit();
     }
 
 }
