@@ -40,16 +40,21 @@ public class BuyMandatoryBooksTest {
         theBook.click();
 
         WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
+
+        String htmlClass = addProductToShoppingBag(wait, addToCartButton);
+
+        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+
+        browser.quit();
+    }
+
+    private String addProductToShoppingBag(WebDriverWait wait, WebElement addToCartButton) {
         addToCartButton.click();
 
 
         WebElement itemInShoppingBag = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
 
-        String htmlClass = itemInShoppingBag.getAttribute("class");
-
-        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
-
-        browser.quit();
+        return itemInShoppingBag.getAttribute("class");
     }
 
     private WebElement locateProduct(String searchString, WebDriverWait wait) {
