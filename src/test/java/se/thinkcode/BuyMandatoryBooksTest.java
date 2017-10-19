@@ -27,7 +27,8 @@ public class BuyMandatoryBooksTest {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
 
-        searchBox.sendKeys("Working Effectively with Legacy Code");
+        String searchString = "Working Effectively with Legacy Code";
+        searchBox.sendKeys(searchString);
         WebElement searchButton = driver.findElement(By.id("nav-search-submit-text"));
 
         searchButton.click();
@@ -40,7 +41,7 @@ public class BuyMandatoryBooksTest {
 
         for (WebElement element : resultListElements) {
             String title = element.getAttribute("title");
-            if (title.contains("Working Effectively with Legacy Code")) {
+            if (title.contains(searchString)) {
                 theBook = element;
                 break;
             }
