@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuyMandatoryBooksTest {
     private WebDriver browser;
+    private WebDriverWait wait;
 
     @Before
     public void setUp() {
@@ -26,6 +27,8 @@ public class BuyMandatoryBooksTest {
         browser = new FirefoxDriver();
 
         browser.get("http://www.amazon.de");
+
+        wait = new WebDriverWait(browser, 20);
     }
 
     @After
@@ -36,12 +39,11 @@ public class BuyMandatoryBooksTest {
     @Test
     public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
         String searchString = "Working Effectively with Legacy Code";
-        WebDriverWait wait = new WebDriverWait(browser, 20);
 
-        searchProduct(searchString, wait);
+        searchProduct(searchString);
 
-        WebElement theBook = locateProduct(searchString, wait);
-        WebElement itemInShoppingBag = addBookToShoppingBag(wait, theBook);
+        WebElement theBook = locateProduct(searchString);
+        WebElement itemInShoppingBag = addBookToShoppingBag(theBook);
 
         assertThatShoppingBagContainsBook(itemInShoppingBag);
     }
@@ -52,7 +54,7 @@ public class BuyMandatoryBooksTest {
         assertThat(htmlClass).containsIgnoringCase("a-alert-success");
     }
 
-    private WebElement addBookToShoppingBag(WebDriverWait wait, WebElement theBook) {
+    private WebElement addBookToShoppingBag(WebElement theBook) {
         theBook.click();
 
         WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
@@ -62,7 +64,7 @@ public class BuyMandatoryBooksTest {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
     }
 
-    private WebElement locateProduct(String searchString, WebDriverWait wait) {
+    private WebElement locateProduct(String searchString) {
         WebElement resultList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s-results-list-atf")));
 
         WebElement theBook = null;
@@ -81,7 +83,7 @@ public class BuyMandatoryBooksTest {
         return theBook;
     }
 
-    private void searchProduct(String searchString, WebDriverWait wait) {
+    private void searchProduct(String searchString) {
         WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
 
         searchBox.sendKeys(searchString);
