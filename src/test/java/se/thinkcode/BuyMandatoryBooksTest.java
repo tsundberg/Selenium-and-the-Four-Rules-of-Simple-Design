@@ -1,5 +1,6 @@
 package se.thinkcode;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -25,6 +26,11 @@ public class BuyMandatoryBooksTest {
         browser = new FirefoxDriver();
 
         browser.get("http://www.amazon.de");
+    }
+
+    @After
+    public void tearDown() {
+        browser.quit();
     }
 
     @Test
@@ -64,8 +70,6 @@ public class BuyMandatoryBooksTest {
         String htmlClass = itemInShoppingBag.getAttribute("class");
 
         assertThat(htmlClass).containsIgnoringCase("a-alert-success");
-
-        browser.quit();
     }
 
 }
