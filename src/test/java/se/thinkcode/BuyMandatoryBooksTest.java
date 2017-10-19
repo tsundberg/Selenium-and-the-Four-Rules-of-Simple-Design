@@ -37,20 +37,25 @@ public class BuyMandatoryBooksTest {
     public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
         String searchString = "Working Effectively with Legacy Code";
         WebDriverWait wait = new WebDriverWait(browser, 20);
+
         searchProduct(searchString, wait);
 
         WebElement theBook = locateProduct(searchString, wait);
+        WebElement itemInShoppingBag = addBookToShoppingBag(wait, theBook);
+
+        String htmlClass = itemInShoppingBag.getAttribute("class");
+
+        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+    }
+
+    private WebElement addBookToShoppingBag(WebDriverWait wait, WebElement theBook) {
         theBook.click();
 
         WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
         addToCartButton.click();
 
 
-        WebElement itemInShoppingBag = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
-
-        String htmlClass = itemInShoppingBag.getAttribute("class");
-
-        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
     }
 
     private WebElement locateProduct(String searchString, WebDriverWait wait) {
