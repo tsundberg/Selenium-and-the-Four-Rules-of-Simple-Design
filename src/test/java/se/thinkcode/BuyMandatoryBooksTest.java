@@ -2,6 +2,7 @@ package se.thinkcode;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -28,9 +29,7 @@ public class BuyMandatoryBooksTest {
         WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
 
         searchBox.sendKeys("Working Effectively with Legacy Code");
-        WebElement searchButton = driver.findElement(By.id("nav-search-submit-text"));
-
-        searchButton.click();
+        searchBox.sendKeys(Keys.RETURN);
 
         WebElement resultList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s-results-list-atf")));
 
