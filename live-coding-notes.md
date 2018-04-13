@@ -329,30 +329,36 @@ Extract a page object
  - Get the test to compile
 
 
+The `AmazonHelper` should look like this:
+
 ```
+package se.thinkcode;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 class AmazonHelper {
     private WebDriverWait wait;
-    private WebDriver browser;
 
     AmazonHelper(WebDriver browser) {
-        this.browser = browser;
         wait = new WebDriverWait(browser, 20);
     }
 
     WebElement findProduct(String searchString) {
         searchProduct(searchString);
 
-        WebElement theBook = locateProduct(searchString);
-        return addBookToShoppingBag(theBook);
+        return locateProduct(searchString);
     }
 
-    void assertThatShoppingBagContainsBook(WebElement itemInShoppingBag) {
-        String htmlClass = itemInShoppingBag.getAttribute("class");
-
-        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
-    }
-
-    private WebElement addBookToShoppingBag(WebElement theBook) {
+    WebElement addProductToShoppingBag(WebElement theBook) {
         theBook.click();
 
         WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
@@ -360,6 +366,12 @@ class AmazonHelper {
 
 
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
+    }
+
+    void assertThatProductIsInShoppingBag(WebElement itemInShoppingBag) {
+        String htmlClass = itemInShoppingBag.getAttribute("class");
+
+        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
     }
 
     private WebElement locateProduct(String searchString) {
@@ -387,10 +399,24 @@ class AmazonHelper {
         searchBox.sendKeys(searchString);
         searchBox.sendKeys(Keys.RETURN);
     }
+
 }
 ```
 
+The test class now becomes:
+
 ```
+package se.thinkcode;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.net.URL;
+
 public class BuyMandatoryBooksTest {
     private WebDriver browser;
     private AmazonHelper amazonHelper;
@@ -403,7 +429,6 @@ public class BuyMandatoryBooksTest {
         browser = new FirefoxDriver();
 
         browser.get("http://www.amazon.de");
-
         amazonHelper = new AmazonHelper(browser);
     }
 
@@ -413,12 +438,13 @@ public class BuyMandatoryBooksTest {
     }
 
     @Test
-    public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
+    public void put_working_effectively_with_legacy_code_in_shopping_bag() {
         String searchString = "Working Effectively with Legacy Code";
+        WebElement theBook = amazonHelper.findProduct(searchString);
 
-        WebElement itemInShoppingBag = amazonHelper.findProduct(searchString);
+        WebElement itemInShoppingBag = amazonHelper.addProductToShoppingBag(theBook);
 
-        amazonHelper.assertThatShoppingBagContainsBook(itemInShoppingBag);
+        amazonHelper.assertThatProductIsInShoppingBag(itemInShoppingBag);
     }
 }
 ```
