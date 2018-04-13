@@ -243,7 +243,23 @@ Extract wait to an instance variable
 private WebDriverWait wait;
 ```
 
-***Better code sample!***
+Create wait in `setUp()`
+
+Setup should look like:
+```
+    @Before
+    public void setUp() {
+        URL url = getClass().getResource("/geckodriver");
+        String geckoDriverPath = url.getFile();
+        System.setProperty("webdriver.gecko.driver", geckoDriverPath);
+        browser = new FirefoxDriver();
+
+        browser.get("http://www.amazon.de");
+        wait = new WebDriverWait(browser, 20);
+    }
+```
+
+Remove `wait` as argument to all method calls in the test  
 
 ### Commit
 Express intent – extracted wait and hide waiting from the test
