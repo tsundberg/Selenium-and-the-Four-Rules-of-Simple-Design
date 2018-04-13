@@ -452,9 +452,111 @@ public class BuyMandatoryBooksTest {
 ### Commit
 Small - extract a page object and hide all navigation
 
-## Replace the test with Cucumber and Gherkin
+## Express intent - Replace the test with Cucumber and Gherkin
 
-***Todo***
+Lets use Cucumber to specify how the system should behave.
 
+Start with adding Cucumber as a dependency
+
+
+```
+testCompile 'io.cucumber:cucumber-java:2.4.0'
+testCompile 'io.cucumber:cucumber-junit:2.4.0'
+```
+
+Then add a Cucumber runner
+
+```
+package se.thinkcode;
+
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+public class RunExamplesTest {
+}
+```
+
+Add a feature file in `src/test/resources/se/thinkcode/mandatory-books.feature`
+
+
+```
+Feature: Buy mandatory books
+
+  You need to study if you want to improve
+
+  Scenario: Buy Working effectively with legacy systems
+    Given I search for Working Effectively with Legacy Code
+    When I find it
+    Then I should put it in my shopping bag
+```
+
+Run `RunExamplesTest` from Idea
+
+Copy the snippets and add them to a new class in `src/test/java/se/thinkcode/MandatoryBooksSteps.java`
+
+```
+package se.thinkcode;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.net.URL;
+
+public class MandatoryBooksSteps {
+    private WebDriver browser;
+    private AmazonHelper helper;
+    private WebElement theBook;
+    private WebElement itemInShoppingBag;
+
+    @Before
+    public void setUp() {
+        URL url = getClass().getResource("/geckodriver");
+        String geckoDriverPath = url.getFile();
+        System.setProperty("webdriver.gecko.driver", geckoDriverPath);
+        browser = new FirefoxDriver();
+
+        browser.get("http://www.amazon.de");
+        helper = new AmazonHelper(browser);
+    }
+
+    @After
+    public void tearDown() {
+        browser.quit();
+    }
+
+    @Given("^I search for (.*)$")
+    public void i_search_for(String searchName) {
+        theBook = helper.findProduct(searchName);
+    }
+
+    @When("^I find it$")
+    public void i_find_it() {
+        itemInShoppingBag = helper.addProductToShoppingBag(theBook);
+    }
+
+    @Then("^I should put it in my shopping bag$")
+    public void i_should_put_it_in_my_shopping_bag() {
+        helper.assertThatProductIsInShoppingBag(itemInShoppingBag);
+    }
+}
+```
+
+### Commit
+Express intent - make it easier to read and validate for non technical people
+
+
+## Duplication
+
+Remove the test class `src/test/java/se/thinkcode/BuyMandatoryBooksTest.java`
+
+### Commit
+Duplication - no need to test the same thing twice
 
 
