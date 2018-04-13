@@ -269,15 +269,56 @@ Express intent – extracted wait and hide waiting from the test
 Hide the details for searching and extracting the book
 Extract to findProduct
 
-***Missing code snippet!***
+Extract
 
 ```
+searchProduct(searchString);
 
+WebElement theBook = locateProduct(searchString);
 ```
 
+to 
+
+```
+private WebElement findProduct(String searchString) {
+    searchProduct(searchString);
+    
+    return locateProduct(searchString);
+}
+```
 
 ### Commit
 Express intent - hide the details for adding and searching
+
+## Clarity 
+
+Format the test so 
+* Arrange
+* Act
+* Assert
+
+is clearly separated
+
+The test should now look like:
+
+```
+@Test
+public void put_working_effectively_with_legacy_code_in_shopping_bag() throws Exception {
+    String searchString = "Working Effectively with Legacy Code";
+    WebElement theBook = findProduct(searchString);
+
+    WebElement itemInShoppingBag = addProductToShoppingBag(theBook);
+
+    assertThatProductIsInShoppingBag(itemInShoppingBag);
+}
+```
+
+### Commit
+Express intent - make 
+* Arrange
+* Act
+* Assert
+explicit
 
 
 ## Small
