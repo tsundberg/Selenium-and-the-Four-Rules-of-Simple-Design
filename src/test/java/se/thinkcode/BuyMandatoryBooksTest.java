@@ -1,5 +1,6 @@
 package se.thinkcode;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -27,7 +28,12 @@ public class BuyMandatoryBooksTest {
 
         browser.get("http://www.amazon.de");
     }
-    
+
+    @After
+    public void tearDown() {
+        browser.quit();
+    }
+
     @Test
     public void put_working_effectively_with_legacy_code_in_shopping_bag() {
         WebDriverWait wait = new WebDriverWait(browser, 20);
@@ -63,8 +69,6 @@ public class BuyMandatoryBooksTest {
         String htmlClass = itemInShoppingBag.getAttribute("class");
 
         assertThat(htmlClass).containsIgnoringCase("a-alert-success");
-
-        browser.quit();
     }
 
 }
