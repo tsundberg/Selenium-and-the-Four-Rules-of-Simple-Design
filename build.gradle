@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    compile 'io.cucumber:cucumber-java:2.4.0'
+    compile 'io.cucumber:cucumber-junit:2.4.0'
     testCompile 'org.seleniumhq.selenium:selenium-java:3.6.0'
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.8.0'
