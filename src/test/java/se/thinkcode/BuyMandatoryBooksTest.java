@@ -44,6 +44,10 @@ public class BuyMandatoryBooksTest {
         WebElement theBook = locateProduct(wait, searchString);
         WebElement itemInShoppingBag = addToBag(wait, theBook);
 
+        assertThatProductIsInBag(itemInShoppingBag);
+    }
+
+    private void assertThatProductIsInBag(WebElement itemInShoppingBag) {
         String htmlClass = itemInShoppingBag.getAttribute("class");
 
         assertThat(htmlClass).containsIgnoringCase("a-alert-success");
