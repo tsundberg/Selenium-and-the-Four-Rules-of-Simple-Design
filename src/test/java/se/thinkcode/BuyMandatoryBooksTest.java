@@ -41,6 +41,21 @@ public class BuyMandatoryBooksTest {
 
         searchProduct(wait, searchString);
 
+        WebElement theBook = locateProduct(wait, searchString);
+        theBook.click();
+
+        WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
+        addToCartButton.click();
+
+
+        WebElement itemInShoppingBag = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
+
+        String htmlClass = itemInShoppingBag.getAttribute("class");
+
+        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+    }
+
+    private WebElement locateProduct(WebDriverWait wait, String searchString) {
         WebElement resultList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s-results-list-atf")));
 
         WebElement theBook = null;
@@ -56,17 +71,7 @@ public class BuyMandatoryBooksTest {
         }
 
         assertThat(theBook).isNotNull();
-        theBook.click();
-
-        WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
-        addToCartButton.click();
-
-
-        WebElement itemInShoppingBag = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
-
-        String htmlClass = itemInShoppingBag.getAttribute("class");
-
-        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+        return theBook;
     }
 
     private void searchProduct(WebDriverWait wait, String searchString) {
