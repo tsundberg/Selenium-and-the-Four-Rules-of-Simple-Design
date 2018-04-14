@@ -42,17 +42,21 @@ public class BuyMandatoryBooksTest {
         searchProduct(wait, searchString);
 
         WebElement theBook = locateProduct(wait, searchString);
+        WebElement itemInShoppingBag = addToBag(wait, theBook);
+
+        String htmlClass = itemInShoppingBag.getAttribute("class");
+
+        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+    }
+
+    private WebElement addToBag(WebDriverWait wait, WebElement theBook) {
         theBook.click();
 
         WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
         addToCartButton.click();
 
 
-        WebElement itemInShoppingBag = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
-
-        String htmlClass = itemInShoppingBag.getAttribute("class");
-
-        assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
     }
 
     private WebElement locateProduct(WebDriverWait wait, String searchString) {
