@@ -24,6 +24,9 @@ The source code written at [SeleniumConf Berlin 2017](https://www.seleniumconf.d
 The source code written at [TestCon Vilnius 2017](http://www.testcon.lt/) is available in the
 [branch test-con-vilnius-2017](https://github.com/tsundberg/Selenium-and-the-Four-Rules-of-Simple-Design/tree/test-con-vilnius-2017)
 
+The source code written at [Testing Stage 2018 in Kyiv](https://testingstage.com/) is available in the
+[branch testing-stage-kyiv-2018](https://github.com/tsundberg/Selenium-and-the-Four-Rules-of-Simple-Design/tree/testing-stagekyiv-2018)
+
 ## Build
 
 Build with Gradle
