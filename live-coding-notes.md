@@ -6,9 +6,13 @@ Live coding session cheat sheet.
 
 Clone the project 
 
+    git clone git@github.com:tsundberg/Selenium-and-the-Four-Rules-of-Simple-Design.git
+
 Create a new branch for the event
 
     git checkout -b [name_of_your_new_branch]
+    
+    git checkout -b itake-2018
 
 ## Test passes
 Build once and see the execution
