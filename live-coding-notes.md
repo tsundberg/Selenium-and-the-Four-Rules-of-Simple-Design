@@ -2,9 +2,18 @@
 
 Live coding session cheat sheet.
 
+## Prepare
+
+Clone the project 
+
+Create a new branch for the event
+
+    git checkout -b [name_of_your_new_branch]
 
 ## Test passes
 Build once and see the execution
+
+`./gradlew build`
 
 ## Express intent
 Rename the test method to
@@ -97,6 +106,54 @@ If there is time...
  - Extract the element name to a variable called id
  - Extract the method
 
+```
+@Test
+public void put_working_effectively_with_legacy_code_in_shopping_bag() {
+    WebDriverWait wait = getWebDriverWait();
+    WebElement searchBox = getWebElement(wait);
+
+    String searchString = "Working Effectively with Legacy Code";
+    searchBox.sendKeys(searchString);
+    searchBox.sendKeys(Keys.RETURN);
+
+    WebElement resultList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s-results-list-atf")));
+
+    WebElement theBook = null;
+
+    List<WebElement> resultListElements = resultList.findElements(By.className("s-access-detail-page"));
+
+    for (WebElement element : resultListElements) {
+        String title = element.getAttribute("title");
+        if (title.contains(searchString)) {
+            theBook = element;
+            break;
+        }
+    }
+
+    assertThat(theBook).isNotNull();
+    theBook.click();
+
+    WebElement addToCartButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
+    addToCartButton.click();
+
+
+    WebElement itemInShoppingBag = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("huc-v2-order-row-icon")));
+
+    String htmlClass = itemInShoppingBag.getAttribute("class");
+
+    assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+}
+
+private WebElement getWebElement(WebDriverWait wait) {
+    String id = "twotabsearchtextbox";
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+}
+
+private WebDriverWait getWebDriverWait() {
+    return new WebDriverWait(browser, 20);
+}
+```
+
 Look at it and notice that it didn't really give anything positive
 
 **Revert**
@@ -177,7 +234,7 @@ private WebElement locateProduct(String searchString, WebDriverWait wait) {
 ```
 
 ### Commit
-Small - extracted product from result
+Small - extracted locating the product
 
 ## Small
 Add product to shopping bag
@@ -460,8 +517,8 @@ Start with adding Cucumber as a dependency
 
 
 ```
-testCompile 'io.cucumber:cucumber-java:2.4.0'
-testCompile 'io.cucumber:cucumber-junit:2.4.0'
+testCompile 'io.cucumber:cucumber-java:3.0.2'
+testCompile 'io.cucumber:cucumber-junit:3.0.2'
 ```
 
 Then add a Cucumber runner
@@ -498,6 +555,7 @@ Copy the snippets and add them to a new class in `src/test/java/se/thinkcode/Man
 ```
 package se.thinkcode;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -531,14 +589,14 @@ public class MandatoryBooksSteps {
         browser.quit();
     }
 
-    @Given("^I search for (.*)$")
-    public void i_search_for(String searchName) {
+    @Given("I search for (.*)")
+    public void i_search(String searchName) {
         theBook = helper.findProduct(searchName);
     }
 
-    @When("^I find it$")
+    @When("I find it")
     public void i_find_it() {
-        itemInShoppingBag = helper.addProductToShoppingBag(theBook);
+        itemInShoppingBag = helper.addToShoppingBag(theBook);
     }
 
     @Then("^I should put it in my shopping bag$")
