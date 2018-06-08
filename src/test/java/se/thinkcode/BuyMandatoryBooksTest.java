@@ -38,11 +38,9 @@ public class BuyMandatoryBooksTest {
     @Test
     public void put_working_effectively_with_legacy_code_in_shopping_bag() {
         WebDriverWait wait = new WebDriverWait(browser, 20);
-        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
-
         String searchString = "Working Effectively with Legacy Code";
-        searchBox.sendKeys(searchString);
-        searchBox.sendKeys(Keys.RETURN);
+
+        searchProduct(wait, searchString);
 
         WebElement resultList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s-results-list-atf")));
 
@@ -70,6 +68,13 @@ public class BuyMandatoryBooksTest {
         String htmlClass = itemInShoppingBag.getAttribute("class");
 
         assertThat(htmlClass).containsIgnoringCase("a-alert-success");
+    }
+
+    private void searchProduct(WebDriverWait wait, String searchString) {
+        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox")));
+
+        searchBox.sendKeys(searchString);
+        searchBox.sendKeys(Keys.RETURN);
     }
 
 }
