@@ -40,8 +40,8 @@ public class BuyMandatoryBooksTest {
     @Test
     public void put_working_effectively_with_legacy_code_in_shopping_bag() {
         String searchString = "Working Effectively with Legacy Code";
-
         WebElement theBook = findProduct(searchString);
+
         WebElement itemInShoppingBag = addProductToShoppingBag(theBook);
 
         assertThatProductIsInShoppingBag(itemInShoppingBag);
